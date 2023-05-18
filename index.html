@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foguete</title>
+    <style>
+        body{
+            width:100%;
+            height:100vh;
+            background-image: linear-gradient(0deg, lightblue, darkblue);
+            overflow:hidden;
+        }
+        .foguete
+        {
+            position:absolute;
+            top:700px;
+            left:700px;
+        }
+        .chao{
+            left:0px;
+            top:500px;
+        }
+    </style>
+</head>
+<body>
+
+    <img id="foguete" src="foguete.gif" width="80px" class="foguete">
+    <img src="chao.webp" width="1400px" height="1000px" class="chao">
+    
+</body>
+
+<script src="jquery-3.7.0.min.js"> </script>
+
+<script>
+
+    data = new Date()
+    tempo_inicial= data.getTime()
+
+
+    document.onkeydown = Pega_Tecla;
+
+function Pega_Tecla(e) 
+{	
+    e = e || window.event;
+
+    tecla = e.keyCode;
+    console.log(tecla); // MOSTRA O CÓDIGO DA TECLA PRESSIONADA
+    
+    data = new Date()
+    tempo_final= data.getTime()
+
+    if(tempo_final - tempo_inicial > 1000)
+    {
+        tempo_inicial=tempo_final
+        
+        if(tecla == 37)
+    {
+        x = x - 20
+    }
+    if(tecla == 39)
+    {
+        x = x +20
+    }
+    }
+    
+    
+}
+    temporizador = setTimeout(Subir,1000)
+    x = 450
+    y = 20
+    TOPO = y + "px"
+    ESQUERDA = x + "px"
+    function Subir()
+    {
+        TOPO = y + "px"
+        $("#foguete").animate({left:ESQUERDA,top:TOPO},1000)
+        temporizador = null
+        temporizador = setInterval(Descer,1000)
+    }
+    function Descer()
+    {
+        y = y + 20
+        if(y>600)
+        {
+            y=700
+        }
+        TOPO = y + "px"
+        $("#foguete").animate({top:TOPO},1000)
+    }
+</script>
+
+</html>
